@@ -1,0 +1,122 @@
+//CODE-JAVA
+
+import java.util.Scanner;
+
+class CoffeMenu{
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        
+
+        //DECLARING VARIABLES. 
+        String UserAsk = "yes";
+        String UserOrder, UserChoice;
+        int Orders = 0, TotalCash = 0;
+        String OrdersSummary = "";
+        
+        while(UserAsk.equals("yes")){
+
+            //COFFEE MENU
+            String Header[] = {"Code", "Items", "Price"};
+            String CoffeeContent[][] = {
+                {"C1", "AMERICANO"},
+                {"C2", "FILIPINO"},
+                {"C3", "ITALIANO"},
+                {"C4", "GERMANO"}
+            }; // Coffee Content CLose Bracket
+
+            //FOR COFFEE PRICE
+            int CoffeePrice[] = {50, 100, 150, 50};
+            
+
+            //PASTRY MENU 
+            String Pastry[][] = {
+                {"A1", "SKYFLAKES"},
+                {"A2", "BINGO"},
+                {"A3", "PRESTO"},
+                {"A4", "PANDESAL"}
+            }; // Pastry content Close Bracket
+
+            //FOR PASTRY PRICE.
+            int PastryPrice[] = {10, 12, 12, 2};
+            
+            
+            System.out.println(" +------+-----------+-------+\t\t +------+-----------+-------+");
+            System.out.printf("\tQuad-Mind COFFE\t\t\t\tQuad-Mind PASTRY\n\n | %-4s | %-9s | %-5s |\t\t | %-4s | %-9s | %-5s |\n", Header[0], Header[1], Header[2], Header[0], Header[1], Header[2]);
+            System.out.println(" +------+-----------+-------+\t\t +------+-----------+-------+");
+            
+            for(int i=0; i<CoffeeContent.length; i++){
+            System.out.printf(" | %-4s | %-9s | %-5s |\t\t | %-4s | %-9s | %-5s |\n", // DISPLAYING WITH FORMAT SPECIFIER.
+            CoffeeContent[i][0], CoffeeContent[i][1], CoffeePrice[i], Pastry[i][0], Pastry[i][1], PastryPrice[i]);
+            }System.out.println(" +------+-----------+-------+\t\t +------+-----------+-------+");
+            System.out.print("Do you want to order? (YES/NO): ");
+            UserChoice = scan.nextLine().toUpperCase();
+            
+            if(UserChoice.equals("YES")){
+                      
+             do {
+                System.out.print("\n+------+-----------+-------+------+-----------+-------+\n"); // DISPLAYING ONLY.
+                System.out.print("ENTER THE CODE OF THE ITEM: ");// questioning the customer. 
+                UserOrder = scan.nextLine().toUpperCase(); // scanning customer input
+                
+
+                //FOR COFFEE ORDERS. 
+                for(int i=0; i<CoffeeContent.length; i++){ // checking if customer input in the index of 0 (because of the legnth)
+                    if(UserOrder.equals(CoffeeContent[i][0])){ // checking if customer input was valid and was in teh menu
+                        System.out.println("Order: " + CoffeeContent[i][0] + " Product: " + CoffeeContent[i][1] + " Price: " + CoffeePrice[i]);
+                        System.out.print("How many would you like to Order? ");
+                        int UserQuanty = scan.nextInt();
+                        scan.nextLine();
+                        
+                        TotalCash += UserQuanty * CoffeePrice[i]; // calculation of customer orders 
+                        Orders += UserQuanty; // update the UserOrders.
+                        OrdersSummary += CoffeeContent[i][1] + " " + UserQuanty + " \n"; // updating the userorders
+                        
+                        System.out.print("WOULD YOU LIKE TO ADD MORE? (YES/NO) ");
+                        UserAsk = scan.nextLine().toUpperCase();
+
+                        if(UserAsk.equals("NO")){
+                            break; // THE PROGRAM WILL BREAK.
+                        }//2nd IF STATEMENT Close Bracket
+
+
+                    }// IF STATEMENT Close Bracket
+                }// for loop Close Braket
+
+
+                // for PASTRY ORDERS. 
+                for(int i=0; i<Pastry.length; i++){ // checking if customer input in the index of 0 (because of the legnth)
+                    if(UserOrder.equals(Pastry[i][0])){ // checking if customer input was valid and was in teh menu
+                        System.out.println("Order: " + Pastry[i][0] + " Product: " + Pastry[i][1] + " Price: " + PastryPrice[i]); // displaying only
+                        System.out.print("How many would you like to Order? "); // questioning the customer. 
+                        int UserQuanty = scan.nextInt();// scanning customer input
+                        scan.nextLine();
+                        
+                        TotalCash += UserQuanty * PastryPrice[i]; // calculation of customer orders 
+                        Orders += UserQuanty; // updating customer orders
+                        OrdersSummary += Pastry[i][1] + " " + UserQuanty + " \n"; // updating the userorders
+                        
+                        System.out.print("WOULD YOU LIKE TO ADD MORE? (YES/NO) ");
+                        UserAsk = scan.nextLine().toUpperCase();
+
+                        if(UserAsk.equals("NO")){
+                            break; // THE PROGRAM WILL BREAK OR STOP.
+
+                        }//2nd IF STATEMENT Close Bracket
+
+                    }// IF STATEMENT Close Bracket
+                }// for loop Close Braket
+            } while(UserAsk.equals("YES"));
+            
+            
+            }//1st question Close Bracket.
+        }//first while loop close bracket 
+
+        System.out.println(" \n+------+---------+---ORDER SUMMARY----+-----------+-------+"); // DISPLAYING ONLY
+        System.out.println(OrdersSummary); // displaying all of the orders 
+        System.out.println("Total Orders = " + Orders); // displaying how many orders customer made
+        System.out.println("\nTotal Price = " + TotalCash); // displaying the total
+        System.err.println("\n\t\tTHANK YOU :)"); // DISPLAYING ONLY.
+
+        
+    }//public static... close bracket
+}//class close bracket
